@@ -16,6 +16,8 @@
  */
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 
+import { db } from "../services";
+
 /**
  * This is the actual context you will use in your router. It will be used to process every request
  * that goes through your tRPC endpoint.
@@ -23,7 +25,9 @@ import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
  * @see https://trpc.io/docs/context
  */
 export const createTRPCContext = (_opts: CreateNextContextOptions) => {
-  return {};
+  return {
+    db,
+  };
 };
 
 /**
