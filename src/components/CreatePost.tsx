@@ -7,11 +7,14 @@ const CreatePost = () => {
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
 
+  const ctx = api.useContext();
+
   const { mutate, isLoading } = api.post.create.useMutation({
     onSuccess: () => {
       setTitle("");
       setCategory("");
       setContent("");
+      void ctx.post.getAllPost.invalidate();
     },
   });
 

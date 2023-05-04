@@ -1,9 +1,10 @@
-import { createPost } from "./post.service";
+import { createPost, getPosts } from "./post.service";
 
 // mongoose database
 export const db = {
   // post collection
   post: {
     create: createPost,
+    getAll: getPosts,
   },
 };

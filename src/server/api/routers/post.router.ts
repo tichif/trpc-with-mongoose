@@ -16,4 +16,10 @@ export const postRouter = createTRPCRouter({
 
       return post;
     }),
+
+  getAllPost: publicProcedure.query(async ({ ctx }) => {
+    const posts = await ctx.db.post.getAll({}, 10, 0);
+
+    return posts;
+  }),
 });

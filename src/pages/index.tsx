@@ -4,8 +4,11 @@ import Link from "next/link";
 
 import { api } from "~/utils/api";
 import CreatePost from "~/components/CreatePost";
+import AllPosts from "~/components/AllPosts";
 
 const Home: NextPage = () => {
+  const { data, isLoading } = api.post.getAllPost.useQuery();
+
   return (
     <>
       <Head>
@@ -16,6 +19,11 @@ const Home: NextPage = () => {
       <main className=" min-h-screen  bg-gradient-to-b from-[#2e026d] to-[#15162c]">
         <h1 className="text-white">Create Post</h1>
         <CreatePost />
+        <hr />
+        {isLoading && <p className="text-white">Loading...</p>}
+        {data &&
+          data?.length > 0 &&
+          data.map((post) => <AllPosts post={post} key={post._id as string} />)}
       </main>
     </>
   );
