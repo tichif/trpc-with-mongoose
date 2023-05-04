@@ -1,8 +1,9 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { createPost } from "~/server/services/post.service";
 
-export const exampleRouter = createTRPCRouter({
+export const postRouter = createTRPCRouter({
   create: publicProcedure
     .input(
       z.object({
@@ -11,8 +12,8 @@ export const exampleRouter = createTRPCRouter({
         category: z.string(),
       })
     )
-    .mutation(async ({ ctx, input }) => {
-      const post = await ctx.db.post.create(input);
+    .mutation(async ({ input }) => {
+      const post = await createPost(input);
 
       return post;
     }),

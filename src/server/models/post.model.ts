@@ -1,8 +1,8 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
 import { type IPost } from "../types/post.type";
 
-const postSchema = new Schema(
+const postSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -18,6 +18,6 @@ const postSchema = new Schema(
   }
 );
 
-const Post = model<IPost>("post", postSchema);
+const Post = mongoose.models.Post || mongoose.model<IPost>("Post", postSchema);
 
 export default Post;
